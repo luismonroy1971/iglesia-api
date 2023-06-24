@@ -75,6 +75,26 @@ export const getChurchs = async (
   }
 };
 
+export const getChurchsPart = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const texto = req.query.iglesia;
+    const churchs = await Church.find({
+      $or: [
+        { name: { $regex: texto, $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
+        { address: { $regex: texto, $options: 'i' } }  // Busca el texto en campo2 (insensible a mayúsculas/minúsculas)
+      ]
+    });
+    return res.json(churchs);
+  } catch (error) {
+    res.status(500).json({ error: 'No se encontraron iglesias' });
+    next(error);
+  }
+};
+
 export const getChurch = async (
   req: Request,
   res: Response,
