@@ -84,8 +84,8 @@ export const getChurchsPart = async (
     const texto = req.query.iglesia;
     const churchs = await Church.find({
       $or: [
-        { name: { $regex: texto, $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
-        { address: { $regex: texto, $options: 'i' } }  // Busca el texto en campo2 (insensible a mayúsculas/minúsculas)
+        { name: { $regex: `.*${texto}.*` , $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
+        { address: { $regex: `.*${texto}.*` , $options: 'i' } }  // Busca el texto en campo2 (insensible a mayúsculas/minúsculas)
       ]
     });
     return res.json(churchs);
