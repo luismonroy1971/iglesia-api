@@ -7,22 +7,22 @@ import { getModelForClass, modelOptions, prop } from "@typegoose/typegoose";
   },
 })
 class Church {
-  @prop({ type: String, required: true })
+  @prop({ type: String, required: [true, 'El nombre es un campo requerido'] })
   name: string;
 
-  @prop({ type: String, required: true })
+  @prop({ type: String, required: [true, 'La dirección es un campo requerido'] })
   address: string;
 
-  @prop({ type: Number, required: true })
+  @prop({ type: Number, required: [true, 'La latitud es un campo requerido'] })
   latitude: number;
 
-  @prop({ type: Number, required: true })
+  @prop({ type: Number, required: [true, 'La longitud es un campo requerido'] })
   length: number;
 
-  @prop({ type: String, required: true })
+  @prop({ type: String, required: [true, 'El nombre del pastor es un campo requerido'] })
   pastorName: string;
 
-  @prop({ type: String, required: true, unique: true })
+  @prop({ type: String, required: [true, 'El correo es un campo requerido'], unique: true })
   email: string;
 
   @prop({ type: String })
@@ -46,10 +46,10 @@ class Church {
   @prop({ type: String })
   scheduleWorshipPrayer: string;
 
-  @prop({ type: String, required: true })
+  @prop({ type: String, required: [true, 'La provincia es un campo requerido'] })
   province: string;
 
-  @prop({ type: String, required: true })
+  @prop({ type: String, required: [true, 'El distrito es un campo requerido'] })
   district: string;
 
 }
