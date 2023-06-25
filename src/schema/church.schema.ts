@@ -5,20 +5,20 @@ export const CreateChurchSchema = z.object({
   body: z.object({
     name: z
       .string()
-      .nonempty(),
+      .nonempty('El nombre es un campo requerido'),
     address: z
       .string()
-      .nonempty(),
+      .nonempty('La dirección es un campo requerido'),
     latitude: z
       .number(),
     length: z
       .number(), 
     pastorName: z
       .string()
-      .nonempty(),
+      .nonempty('El nombre del pastor es un campo requerido'),
     email: z
       .string()
-      .nonempty(),
+      .nonempty('El correo de la iglesia es un campo requerido'),
     phone1: z
       .string(),
     phone2: z
@@ -35,10 +35,10 @@ export const CreateChurchSchema = z.object({
       .string(),
     province: z
       .string()
-      .nonempty(),
+      .nonempty('La provincia es un campo requerido'),
     district: z
       .string()
-      .nonempty(),
+      .nonempty('El distrito es un campo requerido'),
     image: z
     .string(),
   }),
