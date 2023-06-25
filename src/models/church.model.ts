@@ -52,6 +52,16 @@ class Church {
   @prop({ type: String, required: [true, 'El distrito es un campo requerido'] })
   district: string;
 
+  validateData(){
+    if (!this.name) {
+      throw new Error('El nombre es un campo requerido');
+    }
+    if (!this.address) {
+      throw new Error('La dirección es un campo requerido');
+    }
+
+  }
+
 }
 
 const ChurchsModel = getModelForClass(Church);
