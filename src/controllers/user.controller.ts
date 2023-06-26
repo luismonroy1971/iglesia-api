@@ -64,6 +64,20 @@ export const getUsers = async (
   }
 };
 
+export const getUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userFound = await User.findById(req.params.id);
+    if (!userFound) return res.status(204).json();
+    return res.json(userFound);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const signIn = async (
   req: Request,
   res: Response
