@@ -17,7 +17,7 @@ class Church {
   latitude: number;
 
   @prop({ type: Number, required: [true, 'La longitud es un campo requerido'] })
-  length: number;
+  long: number;
 
   @prop({ type: String, required: [true, 'El nombre del pastor es un campo requerido'] })
   pastorName: string;
@@ -45,6 +45,9 @@ class Church {
 
   @prop({ type: String })
   scheduleWorshipPrayer: string;
+
+  @prop({ type: String, required: [true, 'El departamento es un campo requerido'] })
+  department: string;
 
   @prop({ type: String, required: [true, 'La provincia es un campo requerido'] })
   province: string;

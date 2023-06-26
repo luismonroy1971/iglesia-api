@@ -12,7 +12,7 @@ export const createChurch = async (
       name,
       address,
       latitude,
-      length,
+      long,
       pastorName,
       email,
       phone1,
@@ -22,6 +22,7 @@ export const createChurch = async (
       scheduleSabbathSchool,
       scheduleWorshipPrayer,
       scheduleYouthWorship,
+      department,
       province,
       district,
       image,
@@ -39,7 +40,7 @@ export const createChurch = async (
       name,
       address,
       latitude,
-      length,
+      long,
       pastorName,
       email,
       phone1,
@@ -49,6 +50,7 @@ export const createChurch = async (
       scheduleSabbathSchool,
       scheduleWorshipPrayer,
       scheduleYouthWorship,
+      department,
       province,
       district,
       image,
@@ -86,6 +88,31 @@ export const getChurchsPart = async (
       $or: [
         { name: { $regex: `.*${texto}.*` , $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
         { address: { $regex: `.*${texto}.*` , $options: 'i' } }  // Busca el texto en campo2 (insensible a mayúsculas/minúsculas)
+      ]
+    });
+    return res.json(churchs);
+  } catch (error) {
+    res.status(500).json({ error: 'No se encontraron iglesias' });
+    next(error);
+  }
+};
+
+
+export const getChurchsDist = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const departamento = req.query.department;
+    const provincia = req.query.province;
+    const distrito = req.query.district;
+    const churchs = await Church.find({
+      $and: [
+        { department: { $regex: `.*${departamento}.*` , $options: 'i' } },
+        { province: { $regex: `.*${provincia}.*` , $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
+        { district: { $regex: `.*${distrito}.*` , $options: 'i' } }
+          // Busca el texto en campo2 (insensible a mayúsculas/minúsculas)
       ]
     });
     return res.json(churchs);

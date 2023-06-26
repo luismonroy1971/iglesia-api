@@ -11,7 +11,7 @@ export const CreateChurchSchema = z.object({
       .nonempty('La dirección es un campo requerido'),
     latitude: z
       .number(),
-    length: z
+    long: z
       .number(), 
     pastorName: z
       .string()
@@ -33,6 +33,9 @@ export const CreateChurchSchema = z.object({
       .string(),
     scheduleWorshipPrayer: z
       .string(),
+    department: z
+      .string()
+      .nonempty('El departamento es un campo requerido'),
     province: z
       .string()
       .nonempty('La provincia es un campo requerido'),
