@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import User, { IUser } from "../models/user.model";
 import jwt from "jsonwebtoken";
 import config from "../config/config";
@@ -48,6 +48,20 @@ export const updateInitial = async (
     new: true,
   });
   return res.json(req.body);
+};
+
+
+export const getUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const users = await User.find();
+    return res.json(users);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const signIn = async (
