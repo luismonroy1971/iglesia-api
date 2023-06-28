@@ -28,12 +28,12 @@ export const createChurch = async (
       image,
     } = req.body;
 
-    const ChurchFound = await Church.findOne({ email });
+    const ChurchFound = await Church.findOne({ name });
     // if a food with the same title is found
     if (ChurchFound)
       return res
         .status(400)
-        .json({ message: "Email affiliate already exists" });
+        .json({ message: "El mombre ya existe en otra iglesia" });
 
     // create a new food
     const newChurch = new Church({

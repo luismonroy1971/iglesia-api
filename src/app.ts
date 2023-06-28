@@ -7,7 +7,9 @@ import passportMiddleware from "./middlewares/passport";
 import authRoutes from "./routes/auth.routes";
 import specialRoutes from "./routes/special.routes";
 import churchRoutes from "./routes/churchs.routes";
-
+import departmentRoutes from "./routes/departments.routes";
+import provinceRoutes from "./routes/provinces.routes";
+import districtRoutes from "./routes/districts.routes";
 
 // inicializaciones
 const app = express();
@@ -23,7 +25,9 @@ passport.use(passportMiddleware);
 app.use(churchRoutes);
 app.use(authRoutes);
 app.use(specialRoutes);
-
+app.use(provinceRoutes);
+app.use(departmentRoutes);
+app.use(districtRoutes);
 
 app.use((req, res, next) => {
   const error: any = new Error("Not found");
