@@ -14,11 +14,9 @@ export const CreateChurchSchema = z.object({
     long: z
       .number(), 
     pastorName: z
-      .string()
-      .nonempty('El nombre del pastor es un campo requerido'),
+      .string(),
     email: z
-      .string()
-      .nonempty('El correo de la iglesia es un campo requerido'),
+      .string(),    
     phone1: z
       .string(),
     phone2: z

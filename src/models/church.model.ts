@@ -19,10 +19,10 @@ class Church {
   @prop({ type: Number, required: [true, 'La longitud es un campo requerido'] })
   long: number;
 
-  @prop({ type: String, required: [true, 'El nombre del pastor es un campo requerido'] })
+  @prop({ type: String})
   pastorName: string;
 
-  @prop({ type: String, required: [true, 'El correo es un campo requerido'], unique: true })
+  @prop({ type: String})
   email: string;
 
   @prop({ type: String })
