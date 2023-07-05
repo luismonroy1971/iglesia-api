@@ -11,8 +11,10 @@ export const CreateChurchSchema = z.object({
       .nonempty('La dirección es un campo requerido'),
     referenciaDireccion: z
       .string(),
-    latitudLongitud: z
-      .string(),
+    latitud: z
+      .number(),
+    longitud: z
+      .number(),
     obreroCargo: z
       .string(),
     numeroZona: z

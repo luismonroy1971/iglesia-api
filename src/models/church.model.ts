@@ -16,8 +16,11 @@ class Church {
   @prop({ type: String })
   referenciaDireccion: string;
 
-  @prop({ type: String, required: [true, 'La latitud y longitud es un campo requerido'] })
-  latitudLongitud: string;
+  @prop({ type: Number, required: [true, 'La latitud es un campo requerido'] })
+  latitud: number;
+
+  @prop({ type: Number, required: [true, 'La longitud es un campo requerido'] })
+  longitud: number;
 
   @prop({ type: String})
   obreroCargo: string;
