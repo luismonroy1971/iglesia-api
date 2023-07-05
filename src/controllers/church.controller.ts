@@ -29,7 +29,7 @@ export const createChurch = async (
       imagen,
     } = req.body;
 
-    const ChurchFound = await Church.findOne({ name });
+    const ChurchFound = await Church.findOne({ nombreIglesia });
     // if a food with the same title is found
     if (ChurchFound)
       return res
