@@ -8,55 +8,58 @@ import { getModelForClass, modelOptions, prop } from "@typegoose/typegoose";
 })
 class Church {
   @prop({ type: String, required: [true, 'El nombre es un campo requerido'] })
-  name: string;
+  nombreIglesia: string;
 
   @prop({ type: String, required: [true, 'La dirección es un campo requerido'] })
-  address: string;
+  direccionIglesia: string;
+
+  @prop({ type: String })
+  referenciaDireccion: string;
 
   @prop({ type: Number, required: [true, 'La latitud es un campo requerido'] })
-  latitude: number;
-
-  @prop({ type: Number, required: [true, 'La longitud es un campo requerido'] })
-  long: number;
+  latitudLongitud: number;
 
   @prop({ type: String})
-  pastorName: string;
+  obreroCargo: string;
 
   @prop({ type: String})
-  email: string;
+  numeroZona: string;
 
   @prop({ type: String })
-  phone1: string;
+  personaContacto: string;
 
   @prop({ type: String })
-  phone2: string;
+  telefono1: string;
 
   @prop({ type: String })
-  facebookPage: string;
+  telefono2: string;
 
   @prop({ type: String })
-  instagramPage: string;
+  nombreRedes: string;
 
   @prop({ type: String })
-  scheduleYouthWorship: string;
+  linkFacebook: string;
 
   @prop({ type: String })
-  scheduleSabbathSchool: string;
+  linkInstagram: string;
 
   @prop({ type: String })
-  scheduleWorshipPrayer: string;
+  DiasAtencion: string;
+
+  @prop({ type: String })
+  horarioAtencion: string;
 
   @prop({ type: String, required: [true, 'El departamento es un campo requerido'] })
-  department: string;
+  departmento: string;
 
   @prop({ type: String, required: [true, 'La provincia es un campo requerido'] })
-  province: string;
+  provincia: string;
 
   @prop({ type: String, required: [true, 'El distrito es un campo requerido'] })
-  district: string;
+  distrito: string;
 
   @prop({ type: String })
-  image: string;
+  imagen: string;
   
 }
 

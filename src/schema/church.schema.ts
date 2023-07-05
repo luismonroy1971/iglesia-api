@@ -3,44 +3,46 @@ import { z } from "zod";
 
 export const CreateChurchSchema = z.object({
   body: z.object({
-    name: z
+    nombreIglesia: z
       .string()
       .nonempty('El nombre es un campo requerido'),
-    address: z
+    direccionIglesia: z
       .string()
       .nonempty('La dirección es un campo requerido'),
-    latitude: z
-      .number(),
-    long: z
-      .number(), 
-    pastorName: z
+    referenciaDireccion: z
       .string(),
-    email: z
+    latitudLongitud: z
+      .string(),
+    obreroCargo: z
+      .string(),
+    numeroZona: z
+      .string(),
+    personaContacto: z
+      .string(),
+    telefono1: z
+      .string(),
+    telefono2: z
+      .string(),
+    nombreRedes: z
       .string(),    
-    phone1: z
+    linkFacebook: z
       .string(),
-    phone2: z
+    linkInstagram: z
       .string(),
-    facebookPage: z
+    DiasAtencion: z
       .string(),
-    instagramPage: z
+    horarioAtencion: z
       .string(),
-    scheduleYouthWorship: z
-      .string(),
-    scheduleSabbathSchool: z
-      .string(),
-    scheduleWorshipPrayer: z
-      .string(),
-    department: z
+    departmento: z
       .string()
       .nonempty('El departamento es un campo requerido'),
-    province: z
+    provincia: z
       .string()
       .nonempty('La provincia es un campo requerido'),
-    district: z
+    distrito: z
       .string()
       .nonempty('El distrito es un campo requerido'),
-    image: z
+    imagen: z
     .string(),
   }),
 });

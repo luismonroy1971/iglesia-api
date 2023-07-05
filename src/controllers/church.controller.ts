@@ -9,23 +9,24 @@ export const createChurch = async (
 ) => {
   try {
     const {
-      name,
-      address,
-      latitude,
-      long,
-      pastorName,
-      email,
-      phone1,
-      phone2,
-      facebookPage,
-      instagramPage,
-      scheduleSabbathSchool,
-      scheduleWorshipPrayer,
-      scheduleYouthWorship,
-      department,
-      province,
-      district,
-      image,
+      nombreIglesia,
+      direccionIglesia,
+      referenciaDireccion,
+      latitudLongitud,
+      obreroCargo,
+      numeroZona,
+      personaContacto,
+      telefono1,
+      telefono2,
+      nombreRedes,
+      linkFacebook,
+      linkInstagram,
+      DiasAtencion,
+      horarioAtencion,
+      departmento,
+      provincia,
+      distrito,
+      imagen,
     } = req.body;
 
     const ChurchFound = await Church.findOne({ name });
@@ -37,23 +38,24 @@ export const createChurch = async (
 
     // create a new food
     const newChurch = new Church({
-      name,
-      address,
-      latitude,
-      long,
-      pastorName,
-      email,
-      phone1,
-      phone2,
-      facebookPage,
-      instagramPage,
-      scheduleSabbathSchool,
-      scheduleWorshipPrayer,
-      scheduleYouthWorship,
-      department,
-      province,
-      district,
-      image,
+      nombreIglesia,
+      direccionIglesia,
+      referenciaDireccion,
+      latitudLongitud,
+      obreroCargo,
+      numeroZona,
+      personaContacto,
+      telefono1,
+      telefono2,
+      nombreRedes,
+      linkFacebook,
+      linkInstagram,
+      DiasAtencion,
+      horarioAtencion,
+      departmento,
+      provincia,
+      distrito,
+      imagen,
     });
 
     const savedChurch = await newChurch.save();
@@ -86,8 +88,8 @@ export const getChurchsPart = async (
     const texto = req.query.iglesia;
     const churchs = await Church.find({
       $or: [
-        { name: { $regex: `.*${texto}.*` , $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
-        { address: { $regex: `.*${texto}.*` , $options: 'i' } }  // Busca el texto en campo2 (insensible a mayúsculas/minúsculas)
+        { nombreIglesia: { $regex: `.*${texto}.*` , $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
+        { direccionIglesia: { $regex: `.*${texto}.*` , $options: 'i' } }  // Busca el texto en campo2 (insensible a mayúsculas/minúsculas)
       ]
     });
     return res.json(churchs);
@@ -104,14 +106,14 @@ export const getChurchsDist = async (
   next: NextFunction
 ) => {
   try {
-    const departamento = req.query.department;
-    const provincia = req.query.province;
-    const distrito = req.query.district;
+    const departamento = req.query.departmento;
+    const provincia = req.query.provincia;
+    const distrito = req.query.distrito;
     const churchs = await Church.find({
       $and: [
-        { department: { $regex: `.*${departamento}.*` , $options: 'i' } },
-        { province: { $regex: `.*${provincia}.*` , $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
-        { district: { $regex: `.*${distrito}.*` , $options: 'i' } }
+        { departmento: { $regex: `.*${departamento}.*` , $options: 'i' } },
+        { provincia: { $regex: `.*${provincia}.*` , $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
+        { distrito: { $regex: `.*${distrito}.*` , $options: 'i' } }
           // Busca el texto en campo2 (insensible a mayúsculas/minúsculas)
       ]
     });
