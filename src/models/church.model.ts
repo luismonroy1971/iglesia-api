@@ -53,7 +53,7 @@ class Church {
   horarioAtencion: string;
 
   @prop({ type: String, required: [true, 'El departamento es un campo requerido'] })
-  departmento: string;
+  departamento: string;
 
   @prop({ type: String, required: [true, 'La provincia es un campo requerido'] })
   provincia: string;

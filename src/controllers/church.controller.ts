@@ -24,7 +24,7 @@ export const createChurch = async (
       linkInstagram,
       DiasAtencion,
       horarioAtencion,
-      departmento,
+      departamento,
       provincia,
       distrito,
       imagen,
@@ -54,7 +54,7 @@ export const createChurch = async (
       linkInstagram,
       DiasAtencion,
       horarioAtencion,
-      departmento,
+      departamento,
       provincia,
       distrito,
       imagen,
@@ -113,7 +113,7 @@ export const getChurchsDist = async (
     const distrito = req.query.distrito;
     const churchs = await Church.find({
       $and: [
-        { departmento: { $regex: `.*${departamento}.*` , $options: 'i' } },
+        { departamento: { $regex: `.*${departamento}.*` , $options: 'i' } },
         { provincia: { $regex: `.*${provincia}.*` , $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
         { distrito: { $regex: `.*${distrito}.*` , $options: 'i' } }
           // Busca el texto en campo2 (insensible a mayúsculas/minúsculas)

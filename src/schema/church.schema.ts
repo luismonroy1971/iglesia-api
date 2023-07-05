@@ -35,7 +35,7 @@ export const CreateChurchSchema = z.object({
       .string(),
     horarioAtencion: z
       .string(),
-    departmento: z
+    departamento: z
       .string()
       .nonempty('El departamento es un campo requerido'),
     provincia: z
