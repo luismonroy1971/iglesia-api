@@ -108,7 +108,7 @@ export const getChurchsDist = async (
   next: NextFunction
 ) => {
   try {
-    const departamento = req.query.departmento;
+    const departamento = req.query.departamento;
     const provincia = req.query.provincia;
     const distrito = req.query.distrito;
     const churchs = await Church.find({
