@@ -10,7 +10,9 @@ import {
   getChurchs,
   updateChurch,
   getChurchsPart,
-  getChurchsDist
+  getChurchsDist,
+  getChurchsDep,
+  getChurchsProv
 } from "../controllers/church.controller";
 import { validateSchema } from "../middlewares/validateSchema.middleware";
 import { CreateChurchSchema } from "../schema/church.schema";
@@ -22,6 +24,9 @@ router.get("/churchs/:id", getChurch);
 router.get("/churchsFind", getChurchsPart);
 
 router.get("/churchsDist", getChurchsDist);
+router.get("/churchsDep", getChurchsDep);
+router.get("/churchsProv", getChurchsProv);
+
 
 router.post(
   "/churchs",
