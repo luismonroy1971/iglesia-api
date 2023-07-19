@@ -102,36 +102,29 @@ export const getChurchsPart = async (
 };
 
 
-  export const getChurchsDist = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    try {
-      const departamento = req.query.departamento;
-      const provincia = req.query.provincia;
-      const distrito = req.query.distrito;
-      let query: any = {};
-
-      if (departamento) {
-        query.departamento = { $regex: `.*${departamento}.*`, $options: 'i' };
+    export const getChurchsDist = async (
+      req: Request,
+      res: Response,
+      next: NextFunction
+    ) => {
+      try {
+        const departamento = req.query.departamento;
+        const provincia = req.query.provincia;
+        const distrito = req.query.distrito;
+        const churchs = await Church.find({
+          $and: [
+            { departamento: { $regex: `.*${departamento}.*` , $options: 'i' } },
+            { provincia: { $regex: `.*${provincia}.*` , $options: 'i' } }, // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
+            { distrito: { $regex: `.*${distrito}.*` , $options: 'i' } }
+              // Busca el texto en campo2 (insensible a mayúsculas/minúsculas)
+          ]
+        });
+        return res.json(churchs);
+      } catch (error) {
+        res.status(500).json({ error: 'No se encontraron iglesias' });
+        next(error);
       }
-      if (provincia) {
-        query.provincia = { $regex: `.*${provincia}.*`, $options: 'i' };
-      }
-      if (distrito) {
-        query.distrito = { $regex: `.*${distrito}.*`, $options: 'i' };
-      }
-
-      const churchs = await Church.find(query);
-
-      return res.json(churchs);
-    } catch (error) {
-      res.status(500).json({ error: 'No se encontraron iglesias' });
-      next(error);
-    }
-  };
-
+    };
 
 export const getChurch = async (
   req: Request,
