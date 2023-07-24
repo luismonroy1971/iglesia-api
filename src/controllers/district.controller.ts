@@ -49,13 +49,39 @@ export const getDistricts = async (
   try {
     const departamento = req.query.department;
     const provincia = req.query.province;
-    const districts = await District.find({
-      $and: [
-        { department: { $regex: `.*${departamento}.*` , $options: 'i' } },
-        { province: { $regex: `.*${provincia}.*` , $options: 'i' } } // Busca el texto en campo1 (insensible a mayúsculas/minúsculas)
-      ]
-    });
-    return res.json(districts);
+
+    // Realizamos el JOIN usando agregación
+    const districtsWithChurches = await District.aggregate([
+      {
+        $match: {
+          department: { $regex: `.*${departamento}.*`, $options: 'i' },
+          province: { $regex: `.*${provincia}.*`, $options: 'i' },
+        },
+      },
+      {
+        $lookup: {
+          from: 'churches', // Nombre de la colección de iglesias (en minúsculas)
+          localField: 'district', // Campo local que coincide con el campo 'district' de la otra colección
+          foreignField: 'distrito', // Campo de la otra colección que coincide con el campo local
+          as: 'churches', // Nombre del nuevo campo que contendrá el resultado del JOIN (puedes usar el nombre que desees)
+        },
+      },
+      {
+        $match: {
+          churches: { $exists: true, $not: { $size: 0 } }, // Filtramos solo los distritos con iglesias asociadas
+        },
+      },
+      {
+        $project: {
+          _id: 1, // Proyectamos el campo '_id' (ID del distrito)
+          department: 1, // Proyectamos el campo 'department' (Nombre del departamento)
+          province: 1, // Proyectamos el campo 'province' (Nombre de la provincia)
+          district: 1, // Proyectamos el campo 'district' (Nombre del distrito)
+        },
+      },
+    ]);
+
+    return res.json(districtsWithChurches);
   } catch (error) {
     next(error);
   }

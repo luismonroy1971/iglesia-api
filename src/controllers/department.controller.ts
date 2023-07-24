@@ -1,5 +1,6 @@
 import { Response, Request, NextFunction } from "express";
 import Department from "../models/department.model";
+import Churches from "../models/church.model";
 import { CreateDepartment } from "../schema/department.schema";
 
 export const createDepartment = async (
@@ -38,8 +39,30 @@ export const getDepartments = async (
   next: NextFunction
 ) => {
   try {
-    const departments = await Department.find();
-    return res.json(departments);
+    const departmentsWithChurches = await Department.aggregate([
+      {
+        $lookup: {
+          from: 'churches', // Nombre de la colección de iglesias (en minúsculas)
+          localField: 'department', // Campo local que coincide con el campo 'department' de la otra colección
+          foreignField: 'departamento', // Campo de la otra colección que coincide con el campo local
+          as: 'churches', // Nombre del nuevo campo que contendrá el resultado del JOIN (puedes usar el nombre que desees)
+        },
+      },
+      {
+        $match: {
+          churches: { $exists: true, $not: { $size: 0 } }, // Filtramos solo los departamentos que tienen al menos una iglesia
+        },
+      },
+      {
+        $project: {
+          _id: 1, // Proyectamos el campo '_id' (ID del departamento)
+          department: 1, // Proyectamos el campo 'departamento' (Nombre del departamento)
+        },
+      },
+    ]);
+
+    return res.json(departmentsWithChurches);
+
   } catch (error) {
     next(error);
   }
