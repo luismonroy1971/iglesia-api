@@ -50,6 +50,27 @@ export const getDistricts = async (
     const departamento = req.query.department;
     const provincia = req.query.province;
 
+    const districts = await District.find({
+      department: { $regex: `.*${departamento}.*`, $options: 'i' },
+      province: { $regex: `.*${provincia}.*`, $options: 'i' },
+    });
+
+    return res.json(districts);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const getDistricts1 = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const departamento = req.query.department;
+    const provincia = req.query.province;
+
     // Realizamos el JOIN usando agregación
     const districtsWithChurches = await District.aggregate([
       {

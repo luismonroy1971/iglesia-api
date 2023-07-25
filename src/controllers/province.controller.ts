@@ -46,6 +46,23 @@ export const getProvinces = async (
 ) => {
   try {
     const departamento = req.query.department;
+    const provinces = await Province.find({
+      department: { $regex: `.*${departamento}.*`, $options: 'i' },
+    });
+
+    return res.json(provinces);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getProvinces1 = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const departamento = req.query.department;
     const provincesWithChurches = await Province.aggregate([
       {
         $match: {

@@ -33,7 +33,22 @@ export const createDepartment = async (
   }
 };
 
+
 export const getDepartments = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const departments = await Department.find();
+    return res.json(departments);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const getDepartments1 = async (
   req: Request,
   res: Response,
   next: NextFunction
